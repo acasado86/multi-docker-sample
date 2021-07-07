@@ -4,9 +4,20 @@ services:
         image: 'postgres:latest'
         restart: always
         environment:
-          POSTGRES_PASSWORD: example_password
+            POSTGRES_PASSWORD: example
     redis:
         image: 'redis:latest'
+    nginx:
+        depends_on:
+            - api
+            - client
+            - ng-client
+        restart: always
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./nginx
+        ports:
+            - "80:80"
     api:
         build: 
             dockerfile: Dockerfile.dev
@@ -20,7 +31,7 @@ services:
             PGUSER: postgres
             PGHOST: postgres
             PGBATABASE: postgres
-            PGPASSWORD: example_password
+            PGPASSWORD: example
             PGPORT: 5432
     worker:
         build:
@@ -41,8 +52,8 @@ services:
             - /app/node_modules
             - ./client:/app
     ng-client:
-        ports:
-            - "4200:4200"
+        # ports:
+        #     - "4200:4200"
         build:
             dockerfile: Dockerfile.dev
             context: ./ng-client
