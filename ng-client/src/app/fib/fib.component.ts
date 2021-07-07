@@ -34,8 +34,8 @@ export class FibComponent implements OnInit {
   }
 
   fetchIndexes() {
-    return this.httpClient.get<any>('/api/values/all').subscribe(data => {
-      this.seenIndexes = data;
+    return this.httpClient.get<any>('/api/values/all').subscribe((data: {'number': number}[]) => {
+      this.seenIndexes = data.map(el => el.number);
     });
   }
 
