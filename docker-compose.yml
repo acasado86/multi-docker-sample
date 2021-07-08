@@ -51,6 +51,8 @@ services:
         volumes:
             - /app/node_modules
             - ./client:/app
+        environment:
+            PUBLIC_URL: /react
     ng-client:
         # ports:
         #     - "4200:4200"
