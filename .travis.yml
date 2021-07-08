@@ -17,3 +17,11 @@ after_succes:
   - docker build -t acasado/multi-nginx ./nginx
   - docker build -t acasado/multi-server ./server
   - docker build -t acasado/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASS" | docker login --username "$DOCKER_ID" --password-stdin
+  # Take those images and push to docker hub
+  - docker push acasado/multi-client
+  - docker push acasado/multi-ng-client
+  - docker push acasado/multi-nginx
+  - docker push acasado/multi-server
+  - docker push acasado/multi-worker
