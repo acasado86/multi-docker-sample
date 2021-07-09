@@ -6,12 +6,6 @@
             "image": "acasado86/multi-client",
             "hostname": "client",
             "essential": false,
-            "environment": [
-                {
-                    "name": "PUBLIC_URL",
-                    "value": "/react"
-                }
-            ],
             "memory": 128
         },
         {
