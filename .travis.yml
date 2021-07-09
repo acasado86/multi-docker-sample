@@ -3,28 +3,28 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t acasado86/angular-test -f ./ng-client/Dockerfile.dev ./ng-client
-  - docker build -t acasado86/react-test -f ./client/Dockerfile.dev ./client
+# before_install:
+#   - docker build -t acasado86/angular-test -f ./ng-client/Dockerfile.dev ./ng-client
+#   - docker build -t acasado86/react-test -f ./client/Dockerfile.dev ./client
 
-script:
-  - docker run acasado86/angular-test npm run test
-  - docker run -e CI=true acasado86/react-test npm run test -- --coverage
+# script:
+#   - docker run acasado86/angular-test npm run test
+#   - docker run -e CI=true acasado86/react-test npm run test -- --coverage
 
 after_succes:
   - docker build --build-arg PUBLIC_URL=/react -t acasado86/multi-client ./client
-  - docker build -t acasado86/multi-ng-client ./ng-client
+  # - docker build -t acasado86/multi-ng-client ./ng-client
   - docker build -t acasado86/multi-nginx ./nginx
-  - docker build -t acasado86/multi-server ./server
-  - docker build -t acasado86/multi-worker ./worker
-  # Log in to the docker CLI
-  - echo "$DOCKER_PASS" | docker login --username "$DOCKER_ID" --password-stdin
-  # Take those images and push to docker hub
+  # - docker build -t acasado86/multi-server ./server
+  # - docker build -t acasado86/multi-worker ./worker
+  # # Log in to the docker CLI
+  # - echo "$DOCKER_PASS" | docker login --username "$DOCKER_ID" --password-stdin
+  # # Take those images and push to docker hub
   - docker push acasado86/multi-client
-  - docker push acasado86/multi-ng-client
+  # - docker push acasado86/multi-ng-client
   - docker push acasado86/multi-nginx
-  - docker push acasado86/multi-server
-  - docker push acasado86/multi-worker
+  # - docker push acasado86/multi-server
+  # - docker push acasado86/multi-worker
 
 deploy:
   provider: elasticbeanstalk
