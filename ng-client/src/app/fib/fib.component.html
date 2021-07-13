@@ -1,5 +1,5 @@
 <div>
-  <h2>Hello world!!!</h2>
+  <h2>Hello world version 2.0.2!</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <label>Enter yout index:</label>
     <input type="text" name="index" formControlName="index" />
@@ -11,4 +11,8 @@
 
   <h3>Calculated values:</h3>
   <p *ngFor="let item of getValueIndexes()">For index {{ item }} I calculated {{ values[item] }} </p>
+</div>
+<div>
+  <p>Alternative app in React:</p>
+  <a href="/react/">React client version</a>
 </div>
