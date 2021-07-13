@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: web
+  ports:
+    - name: client-react
+      port: 3000
+      targetPort: 3000
+    - name: client-angular
+      port: 4200
+      targetPort: 4200
